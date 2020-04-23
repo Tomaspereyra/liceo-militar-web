@@ -26,11 +26,7 @@ public class ControllerAlumno {
 	/*
 	 * "nombre","apellido","dni","nroMatricula","fecha"
 	 * 
-	 */
-	@RequestMapping("/hola")
-	public String hola() {
-		return "hola";
-	}
+	 */	
 	
 	@RequestMapping("/alta-alumno")
 	@PostMapping
