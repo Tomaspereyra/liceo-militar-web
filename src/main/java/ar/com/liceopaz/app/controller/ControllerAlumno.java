@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.liceopaz.app.modelo.Alumno;
 import ar.com.liceopaz.app.service.IServiceAlumno;
+import ar.com.liceopaz.app.utils.RestResponse;
 @RestController
 public class ControllerAlumno {
 	
 	@Autowired
 	@Qualifier("servicioAlumno")
 	private IServiceAlumno serviceAlumno;
+	@Autowired
+	private RestResponse response;
 	
 	/*
 	 * "nombre","apellido","dni","nroMatricula","fecha"
@@ -31,7 +34,7 @@ public class ControllerAlumno {
 	
 	@RequestMapping("/alta-alumno")
 	@PostMapping
-	public String guardarAlumno(@RequestBody Map<String,String> body) {
+	public RestResponse guardarAlumno(@RequestBody Map<String,String> body) {
 		
 		
 		try {
@@ -41,7 +44,7 @@ public class ControllerAlumno {
 			alumnoNuevo.setDni(Integer.parseInt(body.get("dni")));
 			alumnoNuevo.setMatricula(Integer.parseInt(body.get("matricula")));
 			alumnoNuevo.setFechaNacimiento(new SimpleDateFormat("dd/MM/yyyy").parse(body.get("fecha")));
-			this.serviceAlumno.guardarAlumno(alumnoNuevo);
+			response= this.serviceAlumno.guardarAlumno(alumnoNuevo);
 			
 		
 		} catch (ParseException e) {
@@ -53,7 +56,7 @@ public class ControllerAlumno {
 		
 		
 		
-		return "Alumno cargada";
+		return response;
 	}
 	
 	
