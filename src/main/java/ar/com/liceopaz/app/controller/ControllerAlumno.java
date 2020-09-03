@@ -35,27 +35,26 @@ public class ControllerAlumno {
 	
 	
 	@PostMapping("/alta-alumno")
-	public RestResponse guardarAlumno(@RequestBody Map<String,String> body) {
+	public RestResponse guardarAlumno(@RequestBody Alumno body) {
 		RestResponse response = new RestResponse ();
 		
 		try {
-			Alumno alumnoNuevo = new Alumno();
+			/*Alumno alumnoNuevo = new Alumno();
 			alumnoNuevo.setNombre(body.get("nombre"));
 			alumnoNuevo.setApellido(body.get("apellido"));
 			alumnoNuevo.setDni(Integer.parseInt(body.get("dni")));
 			alumnoNuevo.setMatricula(Integer.parseInt(body.get("matricula")));
 			alumnoNuevo.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(body.get("fecha")));
-			alumnoNuevo = this.serviceAlumno.guardarAlumno(alumnoNuevo);
-			
+*/
+			Alumno alumnoNuevo = this.serviceAlumno.guardarAlumno(body);			
 			Map<String,Object> datos = new HashMap<>();
 			datos.put("datos", alumnoNuevo);
 			response.setCod(200);
 			response.setDatos(datos);
-			response.setMensaje("Alumno creado");
-			
+			response.setMensaje("Alumno creado");	
 			
 		
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			
